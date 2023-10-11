@@ -18,18 +18,19 @@ from django.urls import path, include, re_path
 from rest_framework.routers import SimpleRouter
 
 
-from store.views import BookViewSet, auth
+from store.views import BookViewSet, auth, UserBookRelationView
 
 router = SimpleRouter()
 router.register(r'book', viewset=BookViewSet)
-
+# like
+router.register(r'book_relation', viewset=UserBookRelationView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # auth
     re_path('', include('social_django.urls', namespace='social')),
     path('auth/', auth)
-
 ]
 
 urlpatterns += router.urls
